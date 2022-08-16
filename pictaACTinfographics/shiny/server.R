@@ -101,7 +101,8 @@ server <- function(input, output, session) {
         #if (fs::file_exists("act-pamphlet_interrior-spanish.log")) {fs::file_delete("act-pamphlet_interrior-spanish.log")}
         #if (fs::file_exists("act-pamphlet_interrior-spanish.tex")) {fs::file_delete("act-pamphlet_interrior-spanish.tex")}
       })
-      file.rename(out, file) # move pdf to file for downloading 
+      #file.rename(out, file) # move pdf to file for downloading
+      fs::file_move(out, file)
     },
     contentType = 'application/pdf'
   )
