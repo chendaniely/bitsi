@@ -1,6 +1,13 @@
+# example CURL call:
+# curl -X POST "http://127.0.0.1:8000/gen_image?language=english&today_act=25&today_date=2022-08-21&previous_act=5&previous_date=2021-07-14" -H "accept: image/png" -H "Content-Type: application/json" -d "{\"dummy_data\":[{\"x\":0,\"y\":0},{\"x\":100,\"y\":100}]}"
+#
+# example Request URL:
+# http://127.0.0.1:8000/gen_image?language=english&today_act=25&today_date=2022-08-21&previous_act=5&previous_date=2021-07-14
+
 source("global.R")
 
 #* Return the Asthma Image
+#* 
 #* @param language Language, one of: "english", or "spanish"
 #* @param display_name Name of patient, defaults to ""
 #* @param today_act Current ACT score
@@ -8,6 +15,7 @@ source("global.R")
 #* @param previous_act Previous ACT score
 #* @param previous_date Previous date for ACT score, YYYY-MM-DD
 #* @param dummy_data Empty R dataframe to draw the ggplot2 canvas
+#* 
 #* @serializer contentType list(type='image/png')
 #* @post /gen_image
 gen_image <- function(
@@ -91,3 +99,28 @@ gen_image <- function(
 # gen_image()
 
 # gen_image(today_act = 6)
+
+# Other small text API examples
+
+#* Echo back the input
+#* @param msg The message to echo
+#* @get /echo
+function(msg="") {
+  list(msg = paste0("The message is: '", msg, "'"))
+}
+
+#* Plot a histogram
+#* @serializer png
+#* @get /plot
+function() {
+  rand <- rnorm(100)
+  hist(rand)
+}
+
+#* Return the sum of two numbers
+#* @param a The first number to add
+#* @param b The second number to add
+#* @post /sum
+function(a, b) {
+  as.numeric(a) + as.numeric(b)
+}
