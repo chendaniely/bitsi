@@ -25,3 +25,11 @@ up:
 .PHONY: in
 in:
 	docker exec -it -t bitsi-docker-shiny-1 bash
+
+.PHONY: push
+push:
+	docker tag bitsi-docker-plumber chendaniely/bitsi-docker-plumber
+	docker push chendaniely/bitsi-docker-plumber
+
+	docker tag bitsi-docker-shiny chendaniely/bitsi-docker-shiny
+	docker push chendaniely/bitsi-docker-shiny
