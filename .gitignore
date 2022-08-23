@@ -5,3 +5,4 @@ Rscript.exe*
 .Ruserdata
 
 .DS_Store
+.vscode
