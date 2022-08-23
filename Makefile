@@ -1,15 +1,7 @@
-.PHONY: run
-run:
-	docker run --rm -d .
-
 .PHONY: build
 build:
 	docker build -f Dockerfile-shiny --rm -t bitsi-docker-shiny .
 	docker build -f Dockerfile-plumber --rm -t bitsi-docker-plumber .
-
-.PHONY: rebuild
-rebuild:
-	docker build --no-cache --rm -t bitsi-docker-shiny .
 
 .PHONY: kill
 kill:
