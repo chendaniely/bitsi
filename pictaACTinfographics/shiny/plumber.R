@@ -6,7 +6,7 @@
 
 source("global.R")
 
-#* Return the AIRQ Image
+#* Return the ACQ Image
 
 #* Return the ACQ Image
 #* @param language
