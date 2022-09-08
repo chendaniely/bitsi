@@ -78,6 +78,7 @@ geom_previous_score_date <- function(x, y, language, previous_date, text, size =
   } else {
     display_text <- glue::glue("{previous_date}")
   }
+  print(glue::glue("Y from geom_previous_score_date: {y}"))
   layer(
     geom = 'text',
     stat = "identity",

@@ -6,6 +6,72 @@
 
 source("global.R")
 
+#* Return the AIRQ Image
+
+#* Return the ACQ Image
+#* @param language
+#* @param display_name
+#* @param today_acq
+#* @param previous_acq
+#* @param previous_date
+#* 
+#* @serializer contentType list(type='image/png')
+#* @post /gen_image_acq
+gen_image_acq <- function(
+  language = "english",
+  today_acq = 1.5,
+  previous_acq = 0.3,
+  previous_date = "2022-08-15"
+) {
+  
+  pt_info_acq <- gen_pt_info_acq(
+    display_name = "",
+    language = language,
+    today_date = "",
+    today_acq_score = today_acq,
+    previous_acq = previous_acq,
+    previous_date = previous_date
+  )
+  
+  plot_info <- list(
+    arrow_x_all = gen_x_coords_acq(pt_info_acq$language),
+    image = png::readPNG(pt_info_acq$png_url)
+  )
+  plot_info$base_image_g <- grid::rasterGrob(
+    plot_info$image, interpolate = TRUE
+  )
+  plot_info$plot_pth_norm <- fs::path_norm(tempfile(fileext = '.png'))
+  plot_info$plot_pth_unix <- gsub("\\\\", "/", plot_info$plot_pth_norm)
+
+  print(glue::glue(
+    "Generating base plot."
+  ))
+  base_g <- geom_base_image(plot_info$base_image_g)
+  
+  arrow_g <- geom_score_arrows_acq(
+    base_g = base_g,
+    today_acq = pt_info_acq$today_acq,
+    previous_acq = pt_info_acq$previous_acq,
+    previous_date = pt_info_acq$previous_date_text,
+    language = pt_info_acq$language,
+    x_breaks = plot_info$arrow_x_all
+  )
+  print(glue::glue(
+    "Plumber: Returning plot."
+  ))
+  # https://www.r-bloggers.com/2021/01/how-to-make-rest-apis-with-r-a-beginners-guide-to-plumber/
+  file <- "plot.png"
+  ggsave(
+    filename = file,
+    arrow_g,
+    scale = 1,
+    width = 11,
+    height = 8.5,
+    units = "in",
+    dpi = 300)
+  readBin(file, "raw", n = file.info(file)$size)
+}
+
 #* Return the Asthma Image
 #* 
 #* @param language Language, one of: "english", or "spanish"
@@ -17,8 +83,8 @@ source("global.R")
 #* @param dummy_data Empty R dataframe to draw the ggplot2 canvas
 #* 
 #* @serializer contentType list(type='image/png')
-#* @post /gen_image
-gen_image <- function(
+#* @post /gen_image_act
+gen_image_act <- function(
   language = "english",
   display_name = "",
   today_act = 25,
