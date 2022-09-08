@@ -33,3 +33,9 @@ push:
 
 	docker tag bitsi-docker-shiny chendaniely/bitsi-docker-shiny
 	docker push chendaniely/bitsi-docker-shiny
+
+.PHONY: pull
+pull:
+	docker pull chendaniely/bitsi-docker-plumber
+	docker pull chendaniely/bitsi-docker-shiny
+
