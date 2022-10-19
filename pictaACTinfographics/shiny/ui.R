@@ -1,7 +1,7 @@
 library(shinydashboard)
 
 dashboardPage(
-  dashboardHeader(title = "PICTA ACT"),
+  dashboardHeader(title = "BITSI"),
   dashboardSidebar(
     sidebarMenu(
       menuItem("Single Image", tabName = "single_image", icon = icon("dice-one")),
