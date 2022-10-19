@@ -1,12 +1,24 @@
-# PICTA ACT Infographics
+# BITSI
 
-## Setup
+**Quick Links:**
+
+- Try BITSI: [http://bitsi.pics](http://bitsi.pics)
+- Try the BITSI API:
+- Code base (this repository):
+
+## Welcome
+
+
+
+## Development Guide
+
+### Setup
 
 1. Open the `00-install/01-install_rpkgs.R` script
 2. Select all the code and run it with CTRL+ENTER (or click the source button in RStudio)
 3. Repeat the process for the `00-install/02-install_tinytex.R` script
 
-## Run
+### Run
 
 Make sure the 2 installation/setup scripts have been run.
 

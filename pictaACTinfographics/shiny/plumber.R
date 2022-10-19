@@ -6,9 +6,9 @@
 
 source("global.R")
 
-#* Return the ACQ Image
+#* Asthma Control Questionnaire Image
 
-#* Return the ACQ Image
+#* Return the Asthma Control Questionnaire (ACQ) image
 #* @param language
 #* @param display_name
 #* @param today_acq
@@ -72,7 +72,11 @@ gen_image_acq <- function(
   readBin(file, "raw", n = file.info(file)$size)
 }
 
-#* Return the Asthma Image
+#* Asthma Control Test Image
+#*
+#* Returns the Asthma Control Test (ACT) image
+#*
+#* This was the first image originally created for PICTA
 #* 
 #* @param language Language, one of: "english", or "spanish"
 #* @param display_name Name of patient, defaults to ""
@@ -159,34 +163,4 @@ gen_image_act <- function(
     units = "in",
     dpi = 300)
   readBin(file, "raw", n = file.info(file)$size)
-}
-
-# #debugonce(geom_base_image)
-# gen_image()
-
-# gen_image(today_act = 6)
-
-# Other small text API examples
-
-#* Echo back the input
-#* @param msg The message to echo
-#* @get /echo
-function(msg="") {
-  list(msg = paste0("The message is: '", msg, "'"))
-}
-
-#* Plot a histogram
-#* @serializer png
-#* @get /plot
-function() {
-  rand <- rnorm(100)
-  hist(rand)
-}
-
-#* Return the sum of two numbers
-#* @param a The first number to add
-#* @param b The second number to add
-#* @post /sum
-function(a, b) {
-  as.numeric(a) + as.numeric(b)
 }
